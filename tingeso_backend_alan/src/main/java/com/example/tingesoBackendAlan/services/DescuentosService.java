@@ -102,11 +102,4 @@ public class DescuentosService {
         return descuento;
     }
 
-    public double calcularDescuentoPorBono(AutoEntity auto) {
-        double montodescuento = 0;
-        String marca = auto.getMarca();
-        montodescuento = bonoService.usarBono(marca);
-
-        return montodescuento;
-    }
 }

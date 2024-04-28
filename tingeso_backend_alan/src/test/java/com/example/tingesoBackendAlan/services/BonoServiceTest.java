@@ -2,6 +2,12 @@ package com.example.tingesoBackendAlan.services;
 
 import com.example.tingesoBackendAlan.entities.AutoEntity;
 import com.example.tingesoBackendAlan.entities.BonoEntity;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+import com.example.tingesoBackendAlan.entities.AutoEntity;
+import com.example.tingesoBackendAlan.entities.BonoEntity;
 import com.example.tingesoBackendAlan.entities.ReparacionEntity;
 import com.example.tingesoBackendAlan.repositories.AutoRepository;
 import com.example.tingesoBackendAlan.repositories.BonoRepository;
@@ -23,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class DescuentoServiceTest {
+public class BonoServiceTest {
 
     @Autowired
     private ReparacionService reparacionService;
@@ -36,54 +42,32 @@ public class DescuentoServiceTest {
 
     @MockBean
     private BonoRepository bonoRepository;
-
     @Autowired
     private DescuentosService descuentosService;
+    @Autowired
+    private BonoService bonoService;
 
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this); // inicializa los campos anotados con @MockBean
     }
-
     @Test
-    public void testDescuentoNumeroDeReparaciones() {
+    public void testCalcularDescuentoPorBono() {
 
         AutoEntity auto = new AutoEntity();
-        ReparacionEntity reparacion = new ReparacionEntity();
-
         auto.setPatente("ABC123");
-        auto.setTipoMotor("Gasolina");
+        auto.setMarca("Toyota");
 
-        reparacion.setPatente("ABC123");
-        reparacionRepository.save(reparacion);
+        BonoEntity bono = new BonoEntity();
+        bono.setMarca("Toyota");
+        bono.setNumeroBonos(5);
+        bono.setMontoBono(70000);
+        bonoRepository.save(bono);
 
-        // Configura el comportamiento simulado de reparacionRepository
-        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
-        when(reparacionRepository.countByPatente("ABC123")).thenReturn(1);
+        when(bonoRepository.findByMarca("Toyota")).thenReturn(bono);
 
-        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
-        assertEquals(0.05, descuento);
+        double montobono = bonoService.usarBono("Toyota");
+        assertEquals(70000, montobono);
     }
 
-    @Test
-    public void testCalcularDescuentoDiaDeAtencion() {
-        AutoEntity auto = new AutoEntity();
-        ReparacionEntity reparacion = new ReparacionEntity();
-
-        auto.setPatente("ABC123");
-
-        reparacion.setPatente("ABC123");
-        reparacion.setTipoReparacion(1);
-        reparacion.setIdReparacion(1L);
-        reparacion.setFechaIngreso(LocalDate.parse("2024-04-29"));
-        reparacion.setHoraIngreso(LocalTime.parse("10:00"));
-        reparacion.setFechaSalida(LocalDate.parse("2024-04-30"));
-        reparacion.setHoraSalida(LocalTime.parse("11:00"));
-        reparacion.setFechaRetiro(LocalDate.parse("2024-05-01"));
-        reparacion.setHoraRetiro(LocalTime.parse("12:00"));
-
-        double descuento = descuentosService.calcularDescuentoDiaDeAtencion(reparacion);
-        assertEquals(0.10, descuento);
-    }
 }
-

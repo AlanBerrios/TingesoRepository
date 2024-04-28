@@ -1,6 +1,7 @@
 package com.example.tingesoBackendAlan.services;
 
 
+import com.example.tingesoBackendAlan.entities.AutoEntity;
 import com.example.tingesoBackendAlan.entities.BonoEntity;
 import com.example.tingesoBackendAlan.repositories.BonoRepository;
 import org.springframework.beans.factory.annotation.Autowired;

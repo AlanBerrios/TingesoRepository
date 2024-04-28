@@ -4,14 +4,11 @@ import com.example.tingesoBackendAlan.entities.AutoEntity;
 import com.example.tingesoBackendAlan.entities.HistorialEntity;
 import com.example.tingesoBackendAlan.entities.RelacionReparacionHistorialEntity;
 import com.example.tingesoBackendAlan.entities.ReparacionEntity;
-import com.example.tingesoBackendAlan.repositories.HistorialRepository;
-import com.example.tingesoBackendAlan.repositories.RelacionReparacionHistorialRepository;
+import com.example.tingesoBackendAlan.repositories.*;
 import com.example.tingesoBackendAlan.services.DescuentosService;
 import com.example.tingesoBackendAlan.services.RecargosService;
 import com.example.tingesoBackendAlan.services.AutoService;
 import com.example.tingesoBackendAlan.services.ReparacionService;
-import com.example.tingesoBackendAlan.repositories.AutoRepository;
-import com.example.tingesoBackendAlan.repositories.ReparacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +33,10 @@ public class OficinaCobrosService {
     ReparacionService reparacionService;
     @Autowired
     DescuentosService descuentosService;
+    @Autowired
+    BonoService bonoService;
+    @Autowired
+    BonoRepository bonoRepository;
 
     public double calcularMontoReparacion(Long idReparacion) {
         double montoReparacion = 0;
@@ -347,7 +348,6 @@ public class OficinaCobrosService {
         double descuento = 0;
         double descuento1 = 0;
         double descuento2 = 0;
-        double descuento3 = 0;
         // obtenemos el historial
         HistorialEntity historial = historialRepository.findByIdHistorial(idHistorial);
         // obtenemos la patente del historial
@@ -367,7 +367,7 @@ public class OficinaCobrosService {
         descuento2 = descuentosService.calcularDescuentoDiaDeAtencion(reparacion);
 
         // sumamos los descuentos
-        descuento = descuento1 + descuento2 + descuento3;
+        descuento = descuento1 + descuento2;
         // Redondear el descuento total a 3 decimales
         BigDecimal bdDescuento = BigDecimal.valueOf(descuento);
         bdDescuento = bdDescuento.setScale(3, BigDecimal.ROUND_HALF_UP);
@@ -404,6 +404,9 @@ public class OficinaCobrosService {
 
         // calculamos el monto total final
         montoTotalFinal = montoTotalNeto + (montoTotalNeto * recargo) - (montoTotalNeto * descuento);
+
+        // restamos el bono
+        montoTotalFinal = montoTotalFinal - bonoService.usarBono(auto.getMarca());
 
         // sumamos el IVA
         montoTotalFinal += montoTotalFinal * 0.19;

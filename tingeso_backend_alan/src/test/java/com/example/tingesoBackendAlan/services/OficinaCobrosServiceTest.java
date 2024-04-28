@@ -1,16 +1,10 @@
 package com.example.tingesoBackendAlan.services;
 
 import ch.qos.logback.classic.Logger;
-import com.example.tingesoBackendAlan.entities.AutoEntity;
-import com.example.tingesoBackendAlan.entities.HistorialEntity;
-import com.example.tingesoBackendAlan.entities.RelacionReparacionHistorialEntity;
-import com.example.tingesoBackendAlan.entities.ReparacionEntity;
-import com.example.tingesoBackendAlan.repositories.AutoRepository;
-import com.example.tingesoBackendAlan.repositories.HistorialRepository;
-import com.example.tingesoBackendAlan.repositories.RelacionReparacionHistorialRepository;
+import com.example.tingesoBackendAlan.entities.*;
+import com.example.tingesoBackendAlan.repositories.*;
 import com.example.tingesoBackendAlan.services.DescuentosService;
 import com.example.tingesoBackendAlan.services.ReparacionService;
-import com.example.tingesoBackendAlan.repositories.ReparacionRepository;
 import com.example.tingesoBackendAlan.services.OficinaCobrosService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,6 +39,8 @@ public class OficinaCobrosServiceTest {
     private RecargosService recargosService;
     @Autowired
     private DescuentosService descuentosService;
+    @Autowired
+    private BonoService bonoService;
 
     @MockBean
     ReparacionRepository reparacionRepository;
@@ -54,6 +50,8 @@ public class OficinaCobrosServiceTest {
     HistorialRepository historialRepository;
     @MockBean
     RelacionReparacionHistorialRepository relacionReparacionHistorialRepository;
+    @MockBean
+    BonoRepository bonoRepository;
 
     @BeforeEach
     public void setup() {
@@ -252,6 +250,7 @@ public class OficinaCobrosServiceTest {
         auto.setPatente("ABC123");
         auto.setTipoMotor("Gasolina");
         auto.setTipo("Sedan");
+        auto.setMarca("Toyota");
         auto.setKilometraje(6000);
         auto.setAnio(2010);
         autoRepository.save(auto);
@@ -298,6 +297,13 @@ public class OficinaCobrosServiceTest {
         relacionReparacionHistorial2.setIdReparacion(reparacion2.getIdReparacion());
         relacionReparacionHistorialRepository.save(relacionReparacionHistorial2);
 
+        // Crear y guardar bono
+        BonoEntity bono = new BonoEntity();
+        bono.setMarca("Toyota");
+        bono.setNumeroBonos(5);
+        bono.setMontoBono(70000);
+        bonoRepository.save(bono);
+
         // Configurar el comportamiento de los mocks para que devuelvan los objetos guardados
 
         when(reparacionRepository.countByPatente("ABC123")).thenReturn(2);
@@ -307,13 +313,15 @@ public class OficinaCobrosServiceTest {
         when(reparacionRepository.findByIdReparacion(reparacion.getIdReparacion())).thenReturn(reparacion);
         when(reparacionRepository.findByIdReparacion(reparacion2.getIdReparacion())).thenReturn(reparacion2);
         when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(bonoRepository.findByMarca("Toyota")).thenReturn(bono);
+
 
         // Ejecutar el método que queremos probar
         double montoNeto = oficinaCobrosService.calcularMontoTotalNetoReparaciones(historial.getIdHistorial());
         double montoFinal = oficinaCobrosService.calcularMontoTotalFinal(montoNeto, historial.getIdHistorial());
 
         // Verificar que el monto calculado es el esperado
-        assertEquals(439824, montoFinal);
+        assertEquals(356524, montoFinal);
     }
 
 
