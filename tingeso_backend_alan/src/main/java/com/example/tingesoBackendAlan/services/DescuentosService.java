@@ -25,11 +25,13 @@ public class DescuentosService {
     BonoRepository bonoRepository;
     @Autowired
     BonoService bonoService;
+    @Autowired
+    ReparacionService reparacionService;
 
     public double calcularDescuentoNumeroDeReparaciones(String patente) {
         double descuento = 0;
         AutoEntity auto = autoRepository.findByPatente(patente);
-        Integer numeroReparaciones = reparacionRepository.countByPatente(patente);
+        Integer numeroReparaciones = reparacionService.countNumeroReparacionesByPatenteUltimos12Meses(patente);
         String tipoMotor = auto.getTipoMotor();
 
         switch (tipoMotor) {

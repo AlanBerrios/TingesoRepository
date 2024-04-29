@@ -184,7 +184,7 @@ public class OficinaCobrosServiceTest {
 
         // Ejecutar el método que queremos probar
         double recargo = oficinaCobrosService.calcularRecargos(historial.getIdHistorial());
-        assertEquals(0.16999999999999998, recargo);
+        assertEquals(0.17, recargo);
 
 
     }

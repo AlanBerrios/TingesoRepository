@@ -26,9 +26,9 @@ public class HistorialController {
         return ResponseEntity.ok(historiales);
     }
 
-    @GetMapping("/id/{id}")
-    public ResponseEntity<HistorialEntity> getHistorialById(@PathVariable Long id) {
-        HistorialEntity historial = historialService.getHistorialById(id);
+    @GetMapping("/id/{idHistorial}")
+    public ResponseEntity<HistorialEntity> getHistorialById(@PathVariable Long idHistorial) {
+        HistorialEntity historial = historialService.getHistorialById(idHistorial);
         return ResponseEntity.ok(historial);
     }
 
