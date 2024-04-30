@@ -47,9 +47,6 @@ export default function AutosList() {
                 <td>{auto.tipoMotor}</td>
                 <td>{auto.kilometraje}</td>
                 <td>{auto.numeroAsientos}</td>
-                <td>
-                  <Link to={`/auto/${auto.patente}`}>Ver</Link>
-                </td>
               </tr>
             ))
           }
