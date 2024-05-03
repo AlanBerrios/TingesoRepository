@@ -1,0 +1,196 @@
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: tingeso_alan
+-- ------------------------------------------------------
+-- Server version	8.0.36
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `autos`
+--
+
+DROP TABLE IF EXISTS `autos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `autos` (
+  `patente` varchar(255) NOT NULL,
+  `anio` int DEFAULT NULL,
+  `kilometraje` int DEFAULT NULL,
+  `marca` varchar(255) DEFAULT NULL,
+  `modelo` varchar(255) DEFAULT NULL,
+  `numero_asientos` int DEFAULT NULL,
+  `tipo` varchar(255) DEFAULT NULL,
+  `tipo_motor` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`patente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `autos`
+--
+
+LOCK TABLES `autos` WRITE;
+/*!40000 ALTER TABLE `autos` DISABLE KEYS */;
+INSERT INTO `autos` VALUES ('ABC123',2010,6000,'Toyota','Yaris',4,'Sedan','Gasolina'),('PATENTE1',2001,9000,'Toyota','Rav4',3,'SUV','Gasolina'),('PATENTE2',2023,12000,'Nissan','GTR',2,'Sedan','Diesel'),('PATENTE3',2024,1000,'Chevrolet','Camaro',2,'Sedan','Electrico'),('PATENTE4',2018,9000,'Renault','Kangoo',4,'Furgoneta','Hibrido');
+/*!40000 ALTER TABLE `autos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bonos`
+--
+
+DROP TABLE IF EXISTS `bonos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bonos` (
+  `id_bono` bigint NOT NULL AUTO_INCREMENT,
+  `marca` varchar(255) DEFAULT NULL,
+  `monto_bono` int DEFAULT NULL,
+  `numero_bonos` int DEFAULT NULL,
+  PRIMARY KEY (`id_bono`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bonos`
+--
+
+LOCK TABLES `bonos` WRITE;
+/*!40000 ALTER TABLE `bonos` DISABLE KEYS */;
+INSERT INTO `bonos` VALUES (1,'Toyota',70000,10000),(2,'Chevrolet',10,10000),(3,'Renault',990,10000);
+/*!40000 ALTER TABLE `bonos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `clients`
+--
+
+DROP TABLE IF EXISTS `clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clients` (
+  `rut` varchar(255) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `apellido` varchar(255) DEFAULT NULL,
+  `correo` varchar(255) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `telefono` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`rut`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clients`
+--
+
+LOCK TABLES `clients` WRITE;
+/*!40000 ALTER TABLE `clients` DISABLE KEYS */;
+INSERT INTO `clients` VALUES ('210552820','Alan','Berrios','alan.berrios@usach.cl','Calle lol, Puente Alto','912341234');
+/*!40000 ALTER TABLE `clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `historial`
+--
+
+DROP TABLE IF EXISTS `historial`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `historial` (
+  `id_historial` bigint NOT NULL AUTO_INCREMENT,
+  `patente` varchar(255) DEFAULT NULL,
+  `rut` varchar(255) DEFAULT NULL,
+  `monto_total_final` double DEFAULT NULL,
+  `numero_reparaciones` int DEFAULT NULL,
+  PRIMARY KEY (`id_historial`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `historial`
+--
+
+LOCK TABLES `historial` WRITE;
+/*!40000 ALTER TABLE `historial` DISABLE KEYS */;
+INSERT INTO `historial` VALUES (1,'ABC123','210552820',69496,1),(2,'PATENTEGOD1','RUTGOD1',0,1),(18,'2','2',0,1);
+/*!40000 ALTER TABLE `historial` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `relacion_reparacion_historial`
+--
+
+DROP TABLE IF EXISTS `relacion_reparacion_historial`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `relacion_reparacion_historial` (
+  `id_relacion_reparacion_historial` bigint NOT NULL AUTO_INCREMENT,
+  `id_historial` bigint DEFAULT NULL,
+  `id_reparacion` bigint DEFAULT NULL,
+  PRIMARY KEY (`id_relacion_reparacion_historial`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `relacion_reparacion_historial`
+--
+
+LOCK TABLES `relacion_reparacion_historial` WRITE;
+/*!40000 ALTER TABLE `relacion_reparacion_historial` DISABLE KEYS */;
+INSERT INTO `relacion_reparacion_historial` VALUES (1,1,1),(2,2,2),(9,18,14);
+/*!40000 ALTER TABLE `relacion_reparacion_historial` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `reparaciones`
+--
+
+DROP TABLE IF EXISTS `reparaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reparaciones` (
+  `id_reparacion` bigint NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(255) DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
+  `fecha_retiro` date DEFAULT NULL,
+  `fecha_salida` date DEFAULT NULL,
+  `hora_ingreso` time(6) DEFAULT NULL,
+  `hora_retiro` time(6) DEFAULT NULL,
+  `hora_salida` time(6) DEFAULT NULL,
+  `monto_reparacion` double DEFAULT NULL,
+  `patente` varchar(255) DEFAULT NULL,
+  `tipo_reparacion` int DEFAULT NULL,
+  PRIMARY KEY (`id_reparacion`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reparaciones`
+--
+
+LOCK TABLES `reparaciones` WRITE;
+/*!40000 ALTER TABLE `reparaciones` DISABLE KEYS */;
+INSERT INTO `reparaciones` VALUES (1,'Reparacion del Sistema de Frenos','2024-04-27','2024-04-28','2024-04-28','10:46:15.000000','10:46:21.000000','09:46:27.000000',0,'ABC123',1),(2,'PATENTE1 IDH 2 IDR 2','2024-05-02',NULL,NULL,'14:00:00.000000',NULL,NULL,0,'PATENTE1',2),(14,'PATENTE2','2024-05-02',NULL,NULL,'02:20:00.000000',NULL,NULL,0,'PATENTE2',2);
+/*!40000 ALTER TABLE `reparaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-05-03 14:24:53
