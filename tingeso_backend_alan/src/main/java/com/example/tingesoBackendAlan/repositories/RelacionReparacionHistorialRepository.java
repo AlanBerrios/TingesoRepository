@@ -18,6 +18,8 @@ public interface RelacionReparacionHistorialRepository extends JpaRepository<Rel
     List<RelacionReparacionHistorialEntity> findAllByIdHistorial(Long idHistorial);
     RelacionReparacionHistorialEntity findByIdReparacion(Long idReparacion);
 
+    Integer countByIdHistorial(Long idHistorial);
+
     @Query(value = "SELECT * FROM relacion_reparacion_historial WHERE relacion_reparacion_historial.idRelacionReparacionHistorial = :idRelacionReparacionHistorial", nativeQuery = true)
     AutoEntity findByIdRelacionReparacionHistorialQuery(@Param("idRelacionReparacionHistorial") Long idRelacionReparacionHistorial);
 

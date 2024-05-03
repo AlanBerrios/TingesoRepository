@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -32,9 +33,7 @@ public class RecargosServiceTest {
     private RecargosService recargosService;
 
     @BeforeEach
-    public void setup() {
-        MockitoAnnotations.openMocks(this); // inicializa los campos anotados con @MockBean
-    }
+    public void setup() {MockitoAnnotations.openMocks(this);}
 
     @Test
     public void testCalcularRecargoPorKilometraje() {

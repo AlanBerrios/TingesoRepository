@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AutosList from './components/AutosList';
 import CreateAuto from './components/CreateAuto';
+import CreateHistorial from './components/CreateHistorial';
 import ReparacionList from './components/ReparacionList';
 import HistorialList from './components/HistorialList';
+import FormReparacion from './components/FormReparacion';
 
 
 function App() {
@@ -20,17 +22,17 @@ function App() {
         <Route path="/auto/crear" element={<CreateAuto/>}/>
 
         
-        <Route path="/reparacion" element={<ReparacionList/>}/>
+        <Route path="/reparacion" element={<ReparacionList/>}/>**
         {/* <Route path="/reparacion/:id" element={<ReparacionView/>}/> */}
         
         <Route path="/historial" element={<HistorialList/>}/>
+
+        <Route path="/historial/crear" element={<CreateHistorial/>}/> 
+
         {/*
         Aqui se vera el historial especificamente, mostrando todos las reparaciones vinculadas al idHistorial
-        <Route path="/historial/:id" element={<HistorialView/>}/>
+        <Route path="/historial/:id" element={<HistorialView/>}/>*/}
         
-        Aqui crearemos un historial, donde a su par iremos agregando reparaciones con su form
-         de forma que la relacion reparacion historial se hace altiro
-        <Route path="/historial/crear" element={<CreateHistorial/>}/>  */}
 
       </Routes>
 

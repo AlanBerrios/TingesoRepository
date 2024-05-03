@@ -6,17 +6,6 @@ const REPARACIONES_API_URL = "http://localhost:8090/api/reparaciones/";
 const BONO_API_URL = "http://localhost:8090/api/bono/";
 const HISTORIAL_API_URL = "http://localhost:8090/api/historial/";
 const RELACIONREPARACIONHISTORIAL_API_URL = "http://localhost:8090/api/relacionreparacionhistorial/";
-const OFICINACOBROS_API_URL = "http://localhost:8090/api/oficinacobros/";
-
-async function calcularMontoTotalFinal(idHistorial) {
-    try {
-      const response = await axios.get(`${OFICINACOBROS_API_URL}calcularMontoTotal/${idHistorial}`);
-      return response.data;
-    } catch (error) {
-      console.error("Error al calcular el monto total final:", error);
-      throw error;
-    }
-  }
 
 function crearCliente(cliente) {
   return axios.post(CLIENTES_API_URL, cliente);  

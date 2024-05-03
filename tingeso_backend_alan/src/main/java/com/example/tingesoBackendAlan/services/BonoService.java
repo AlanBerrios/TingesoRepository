@@ -38,7 +38,9 @@ public class BonoService {
     public double usarBono(String marca){
         double monto = 0;
         BonoEntity bono = bonoRepository.findByMarca(marca);
-
+        if (bono == null){
+            return monto;
+        }
         if(bono.getNumeroBonos() == 0){
             return monto;
         }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,7 +15,6 @@ import java.util.List;
 public class HistorialController {
 
     HistorialService historialService;
-
     @Autowired
     public HistorialController(HistorialService historialService) {
         this.historialService = historialService;
@@ -23,6 +23,12 @@ public class HistorialController {
     @GetMapping("/")
     public ResponseEntity<List<HistorialEntity>> listHistoriales() {
         List<HistorialEntity> historiales = historialService.getHistoriales();
+        return ResponseEntity.ok(historiales);
+    }
+
+    @GetMapping("/2")
+    public ResponseEntity<List<HistorialEntity>> listHistoriales2() {
+        ArrayList<HistorialEntity> historiales = historialService.getHistoriales2();
         return ResponseEntity.ok(historiales);
     }
 

@@ -50,16 +50,19 @@ public class DescuentoServiceTest {
 
         AutoEntity auto = new AutoEntity();
         ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
 
         auto.setPatente("ABC123");
         auto.setTipoMotor("Gasolina");
 
         reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
         reparacionRepository.save(reparacion);
+
 
         // Configura el comportamiento simulado de reparacionRepository
         when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
-        when(reparacionRepository.countByPatente("ABC123")).thenReturn(1);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(2);
 
         double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
         assertEquals(0.05, descuento);

@@ -341,6 +341,7 @@ public class OficinaCobrosService {
         recargo = bdRecargo.doubleValue();
 
         // devolvemos el recargo
+        System.out.println("Recargo: " + recargo);
         return recargo;
     }
 
@@ -362,9 +363,11 @@ public class OficinaCobrosService {
 
         // calculamos el descuento por numero de reparaciones
         descuento1 = descuentosService.calcularDescuentoNumeroDeReparaciones(auto.getPatente());
+        System.out.println("Descuento numero de reparaciones: " + descuento1);
 
         // calculamos el descuento por dia de atencion
         descuento2 = descuentosService.calcularDescuentoDiaDeAtencion(reparacion);
+        System.out.println("Descuento dia de atencion: " + descuento2);
 
         // sumamos los descuentos
         descuento = descuento1 + descuento2;
@@ -373,11 +376,13 @@ public class OficinaCobrosService {
         bdDescuento = bdDescuento.setScale(3, BigDecimal.ROUND_HALF_UP);
         // Obtener el descuento total redondeado como double
         descuento = bdDescuento.doubleValue();
+
+        System.out.println("Descuento: " + descuento);
         // devolvemos el descuento
         return descuento;
     }
 
-    public double calcularMontoTotalFinal(double montoTotalNeto, Long idHistorial) {
+    public double calcularMontoTotalFinal(Long idHistorial) {
         double montoTotalFinal = 0;
         double recargo = 0;
         double descuento = 0;
@@ -402,15 +407,20 @@ public class OficinaCobrosService {
         // calculamos el descuento
         descuento = calcularDescuentos(idHistorial);
 
+        // calculamos el monto total neto
+        double montoTotalNeto = calcularMontoTotalNetoReparaciones(idHistorial);
+        System.out.println("Monto total neto: " + montoTotalNeto);
+
         // calculamos el monto total final
         montoTotalFinal = montoTotalNeto + (montoTotalNeto * recargo) - (montoTotalNeto * descuento);
-
+        System.out.println("Monto total final: " + montoTotalFinal);
         // restamos el bono
         montoTotalFinal = montoTotalFinal - bonoService.usarBono(auto.getMarca());
-
+        System.out.println("Monto total final con bono: " + montoTotalFinal);
         // sumamos el IVA
         montoTotalFinal += montoTotalFinal * 0.19;
-
+        System.out.println("Monto total final con IVA: " + montoTotalFinal);
+        historial.setMontoTotalFinal(montoTotalFinal);
 
         // devolvemos el monto total final
         return montoTotalFinal;

@@ -317,8 +317,7 @@ public class OficinaCobrosServiceTest {
 
 
         // Ejecutar el método que queremos probar
-        double montoNeto = oficinaCobrosService.calcularMontoTotalNetoReparaciones(historial.getIdHistorial());
-        double montoFinal = oficinaCobrosService.calcularMontoTotalFinal(montoNeto, historial.getIdHistorial());
+        double montoFinal = oficinaCobrosService.calcularMontoTotalFinal(historial.getIdHistorial());
 
         // Verificar que el monto calculado es el esperado
         assertEquals(356524, montoFinal);

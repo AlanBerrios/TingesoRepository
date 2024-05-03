@@ -96,6 +96,10 @@ public class RecargosService {
         LocalDate fechaSalida = reparacion.getFechaSalida();
         LocalDate fechaRetiro = reparacion.getFechaRetiro();
 
+        if (fechaSalida == null || fechaRetiro == null) {
+            return recargo;
+        }
+
         // Calcular la diferencia en días entre las fechas de salida y retiro
         long diasDiferencia = ChronoUnit.DAYS.between(fechaSalida, fechaRetiro);
 

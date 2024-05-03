@@ -37,27 +37,5 @@ public class ReparacionService {
         reparacionRepository.deleteById(id);
         return true;
     }
-
-    public Integer countNumeroReparacionesByPatenteUltimos12Meses(String patente){
-        Integer numeroReparaciones = 0;
-
-        List<ReparacionEntity> reparaciones = reparacionRepository.findAllByPatente(patente);
-        for (ReparacionEntity reparacion : reparaciones) {
-            LocalDate fechaSalidaReparacion = reparacion.getFechaSalida();
-
-            // Obtener la fecha actual
-            LocalDate fechaActual = LocalDate.now();
-
-            // Calcular la diferencia
-            long mesesDiferencia = ChronoUnit.MONTHS.between(fechaSalidaReparacion, fechaActual);
-
-            if (mesesDiferencia > 12) {
-                numeroReparaciones++;
-            }
-        }
-
-        return numeroReparaciones;
-    }
-
 }
 

@@ -23,5 +23,9 @@ public class HistorialEntity {
     private String patente;
     @Column(name = "rut")
     private String rut;
+    @Column(name = "numero_reparaciones")
+    private Integer numeroReparaciones;
+    @Column(name = "monto_total_final")
+    private double montoTotalFinal;
 
 }

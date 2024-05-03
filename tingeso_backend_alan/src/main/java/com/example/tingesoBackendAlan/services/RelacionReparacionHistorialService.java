@@ -41,4 +41,8 @@ public class RelacionReparacionHistorialService {
     public RelacionReparacionHistorialEntity getRelacionReparacionHistorialByReparacionId(Long idReparacion) {
         return relacionReparacionHistorialRepository.findByIdReparacion(idReparacion);
     }
+
+    public Integer countByHistorialId(Long idHistorial) {
+        return relacionReparacionHistorialRepository.countByIdHistorial(idHistorial);
+    }
 }
