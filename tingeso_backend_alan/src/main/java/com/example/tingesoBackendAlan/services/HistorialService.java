@@ -2,8 +2,6 @@ package com.example.tingesoBackendAlan.services;
 
 import com.example.tingesoBackendAlan.entities.HistorialEntity;
 import com.example.tingesoBackendAlan.repositories.HistorialRepository;
-import com.example.tingesoBackendAlan.services.RelacionReparacionHistorialService;
-import com.example.tingesoBackendAlan.services.OficinaCobrosService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,6 @@ public class HistorialService {
     public ArrayList<HistorialEntity> getHistoriales2(){
         return (ArrayList<HistorialEntity>) historialRepository.findAll();
     }
-
     public List<HistorialEntity> getHistoriales() {
         List<HistorialEntity> historiales = historialRepository.findAll();
 
@@ -38,11 +35,9 @@ public class HistorialService {
         }
         return historiales;
     }
-
     public HistorialEntity saveHistorial(HistorialEntity historial){
         return historialRepository.save(historial);
     }
-
     public HistorialEntity getHistorialById(Long idHistorial){
         return historialRepository.findByIdHistorial(idHistorial);
     }
@@ -52,7 +47,6 @@ public class HistorialService {
     public HistorialEntity updateHistorial(HistorialEntity historial) {
         return historialRepository.save(historial);
     }
-
     public Boolean deleteHistorial(Long idHistorial) {
         historialRepository.deleteByIdHistorial(idHistorial);
         return true;

@@ -2,6 +2,8 @@ package com.example.tingesoBackendAlan.services;
 
 import com.example.tingesoBackendAlan.entities.AutoEntity;
 import com.example.tingesoBackendAlan.entities.BonoEntity;
+import com.example.tingesoBackendAlan.entities.HistorialEntity;
+import com.example.tingesoBackendAlan.repositories.HistorialRepository;
 import com.example.tingesoBackendAlan.services.BonoService;
 import com.example.tingesoBackendAlan.entities.ReparacionEntity;
 import com.example.tingesoBackendAlan.repositories.AutoRepository;
@@ -27,6 +29,8 @@ public class DescuentosService {
     BonoService bonoService;
     @Autowired
     ReparacionService reparacionService;
+    @Autowired
+    HistorialRepository historialRepository;
 
     public double calcularDescuentoNumeroDeReparaciones(String patente) {
         double descuento = 0;

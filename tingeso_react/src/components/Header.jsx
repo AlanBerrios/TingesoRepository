@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Link } from "react-router-dom";
 
 export default function Header() {
@@ -25,6 +26,15 @@ export default function Header() {
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/reparacion">Lista Reparaciones</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/r1">R1</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/r2">R2</Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to="/r4">R4</Link>
             </li>
           </ul>
         </div>

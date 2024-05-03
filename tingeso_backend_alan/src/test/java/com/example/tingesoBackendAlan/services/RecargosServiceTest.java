@@ -36,7 +36,7 @@ public class RecargosServiceTest {
     public void setup() {MockitoAnnotations.openMocks(this);}
 
     @Test
-    public void testCalcularRecargoPorKilometraje() {
+    public void testCalcularRecargoPorKilometrajeSedan() {
         AutoEntity auto = new AutoEntity();
         auto.setKilometraje(6000);
         auto.setTipo("Sedan");
@@ -45,9 +45,88 @@ public class RecargosServiceTest {
         assertEquals(0.03, recargo);
     }
 
+    @Test
+    public void testCalcularRecargoPorKilometrajeSedan2() {
+        AutoEntity auto = new AutoEntity();
+        auto.setKilometraje(12002);
+        auto.setTipo("Sedan");
+
+        double recargo = recargosService.calcularRecargoPorKilometraje(auto);
+        assertEquals(0.07, recargo);
+    }
 
     @Test
-    public void testCalcularRecargoPorAntiguedadDelVehiculo() {
+    public void testCalcularRecargoPorKilometrajeSedan3() {
+        AutoEntity auto = new AutoEntity();
+        auto.setKilometraje(25002);
+        auto.setTipo("Sedan");
+
+        double recargo = recargosService.calcularRecargoPorKilometraje(auto);
+        assertEquals(0.12, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorKilometrajeSedan4() {
+        AutoEntity auto = new AutoEntity();
+        auto.setKilometraje(40002);
+        auto.setTipo("Sedan");
+
+        double recargo = recargosService.calcularRecargoPorKilometraje(auto);
+        assertEquals(0.20, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorKilometrajeSUV1() {
+        AutoEntity auto = new AutoEntity();
+        auto.setKilometraje(6000);
+        auto.setTipo("SUV");
+
+        double recargo = recargosService.calcularRecargoPorKilometraje(auto);
+        assertEquals(0.05, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorKilometrajeSUV2() {
+        AutoEntity auto = new AutoEntity();
+        auto.setKilometraje(12002);
+        auto.setTipo("SUV");
+
+        double recargo = recargosService.calcularRecargoPorKilometraje(auto);
+        assertEquals(0.09, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorKilometrajeSUV3() {
+        AutoEntity auto = new AutoEntity();
+        auto.setKilometraje(25002);
+        auto.setTipo("SUV");
+
+        double recargo = recargosService.calcularRecargoPorKilometraje(auto);
+        assertEquals(0.12, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorKilometrajeSUV4() {
+        AutoEntity auto = new AutoEntity();
+        auto.setKilometraje(40002);
+        auto.setTipo("SUV");
+
+        double recargo = recargosService.calcularRecargoPorKilometraje(auto);
+        assertEquals(0.20, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorAntiguedadDelVehiculoSedan0() {
+        AutoEntity auto = new AutoEntity();
+        auto.setTipo("Sedan");
+        auto.setAnio(2023);
+
+        double recargo = recargosService.calcularRecargoPorAntiguedadDelVehiculo(auto);
+        assertEquals(0, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorAntiguedadDelVehiculoSedan1() {
         AutoEntity auto = new AutoEntity();
         auto.setTipo("Sedan");
         auto.setAnio(2015);
@@ -55,6 +134,67 @@ public class RecargosServiceTest {
         double recargo = recargosService.calcularRecargoPorAntiguedadDelVehiculo(auto);
         assertEquals(0.05, recargo);
     }
+
+    @Test
+    public void testCalcularRecargoPorAntiguedadDelVehiculoSedan2() {
+        AutoEntity auto = new AutoEntity();
+        auto.setTipo("Sedan");
+        auto.setAnio(2010);
+
+        double recargo = recargosService.calcularRecargoPorAntiguedadDelVehiculo(auto);
+        assertEquals(0.09, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorAntiguedadDelVehiculoSedan3() {
+        AutoEntity auto = new AutoEntity();
+        auto.setTipo("Sedan");
+        auto.setAnio(2005);
+
+        double recargo = recargosService.calcularRecargoPorAntiguedadDelVehiculo(auto);
+        assertEquals(0.15, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorAntiguedadDelVehiculoSUV0() {
+        AutoEntity auto = new AutoEntity();
+        auto.setTipo("SUV");
+        auto.setAnio(2023);
+
+        double recargo = recargosService.calcularRecargoPorAntiguedadDelVehiculo(auto);
+        assertEquals(0, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorAntiguedadDelVehiculoSUV1() {
+        AutoEntity auto = new AutoEntity();
+        auto.setTipo("SUV");
+        auto.setAnio(2015);
+
+        double recargo = recargosService.calcularRecargoPorAntiguedadDelVehiculo(auto);
+        assertEquals(0.07, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorAntiguedadDelVehiculoSUV2() {
+        AutoEntity auto = new AutoEntity();
+        auto.setTipo("SUV");
+        auto.setAnio(2010);
+
+        double recargo = recargosService.calcularRecargoPorAntiguedadDelVehiculo(auto);
+        assertEquals(0.11, recargo);
+    }
+
+    @Test
+    public void testCalcularRecargoPorAntiguedadDelVehiculoSUV3() {
+        AutoEntity auto = new AutoEntity();
+        auto.setTipo("SUV");
+        auto.setAnio(2005);
+
+        double recargo = recargosService.calcularRecargoPorAntiguedadDelVehiculo(auto);
+        assertEquals(0.2, recargo);
+    }
+
 
 
     @Test

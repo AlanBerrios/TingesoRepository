@@ -31,6 +31,22 @@ function getAuto(patente) {
     return axios.get(`${AUTO_API_URL}${patente}`)
 }
 
+function getSumaReparacionesNeto(patente) {
+    return axios.get(`${AUTO_API_URL}sumaReparacionesNeto/${patente}`)
+}
+
+function getMontoRecargo(patente) {
+    return axios.get(`${AUTO_API_URL}montoRecargo/${patente}`)
+}
+
+function getMontoDescuento(patente) {
+    return axios.get(`${AUTO_API_URL}montoDescuento/${patente}`)
+}
+
+function getMontoTotal(patente) {
+    return axios.get(`${AUTO_API_URL}montoTotal/${patente}`)
+}
+
 function crearReparacion(reparacion) {
     return axios.post(REPARACIONES_API_URL, reparacion);
 }
@@ -88,6 +104,7 @@ function getRelacionesReparacionHistorial(idRelacionReparacionHistorial) {
 
 
 export default {crearCliente, getCliente, getClientes, crearAuto, getAuto, getAutos, crearReparacion, getReparacion, 
+    getSumaReparacionesNeto, getMontoRecargo, getMontoDescuento, getMontoTotal,
     getReparaciones, getReparacionByPatente, crearBono, getBono, getBonos, crearHistorial, getHistorial, getHistoriales, crearRelacionReparacionHistorial, getRelacionesReparacionHistorial, getRelacionReparacionHistorial
 }
 

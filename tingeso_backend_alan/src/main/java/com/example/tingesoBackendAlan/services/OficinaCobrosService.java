@@ -277,7 +277,6 @@ public class OficinaCobrosService {
         }
         return montoReparacion;
     }
-
     public double calcularMontoTotalNetoReparaciones(Long idHistorial) {
         double montoTotal = 0;
         double montoReparacion = 0;
@@ -309,7 +308,6 @@ public class OficinaCobrosService {
         // devolvemos el monto total neto
         return montoTotal;
     }
-
     public double calcularRecargos(Long idHistorial) {
         double recargo = 0;
         RecargosService recargosService = new RecargosService();
@@ -344,7 +342,6 @@ public class OficinaCobrosService {
         System.out.println("Recargo: " + recargo);
         return recargo;
     }
-
     public double calcularDescuentos(Long idHistorial) {
         double descuento = 0;
         double descuento1 = 0;
@@ -363,11 +360,9 @@ public class OficinaCobrosService {
 
         // calculamos el descuento por numero de reparaciones
         descuento1 = descuentosService.calcularDescuentoNumeroDeReparaciones(auto.getPatente());
-        System.out.println("Descuento numero de reparaciones: " + descuento1);
 
         // calculamos el descuento por dia de atencion
         descuento2 = descuentosService.calcularDescuentoDiaDeAtencion(reparacion);
-        System.out.println("Descuento dia de atencion: " + descuento2);
 
         // sumamos los descuentos
         descuento = descuento1 + descuento2;
@@ -381,7 +376,27 @@ public class OficinaCobrosService {
         // devolvemos el descuento
         return descuento;
     }
+    public double calcularMontoConDescuento(String patente) {
+        double descuento = 0;
+        double montoTotalNeto = 0;
+        AutoEntity auto = autoRepository.findByPatente(patente);
+        HistorialEntity historial = historialRepository.findByPatente(patente);
+        double descuentoTotal = calcularDescuentos(historial.getIdHistorial());
+        montoTotalNeto = calcularMontoTotalNetoReparaciones(historial.getIdHistorial());
+        descuento = montoTotalNeto * descuentoTotal;
+        return descuento;
+    }
 
+    public double calcularMontoConRecargo(String patente){
+        double montoTotalNeto = 0;
+        AutoEntity auto = autoRepository.findByPatente(patente);
+        ReparacionEntity reparacion = reparacionRepository.findByPatente(patente);
+        HistorialEntity historial = historialRepository.findByPatente(patente);
+        montoTotalNeto = calcularMontoTotalNetoReparaciones(historial.getIdHistorial());
+        double recargo = calcularRecargos(historial.getIdHistorial());
+        double recargoTotal = montoTotalNeto * recargo;
+        return recargoTotal;
+    }
     public double calcularMontoTotalFinal(Long idHistorial) {
         double montoTotalFinal = 0;
         double recargo = 0;
@@ -409,17 +424,13 @@ public class OficinaCobrosService {
 
         // calculamos el monto total neto
         double montoTotalNeto = calcularMontoTotalNetoReparaciones(idHistorial);
-        System.out.println("Monto total neto: " + montoTotalNeto);
 
         // calculamos el monto total final
         montoTotalFinal = montoTotalNeto + (montoTotalNeto * recargo) - (montoTotalNeto * descuento);
-        System.out.println("Monto total final: " + montoTotalFinal);
         // restamos el bono
         montoTotalFinal = montoTotalFinal - bonoService.usarBono(auto.getMarca());
-        System.out.println("Monto total final con bono: " + montoTotalFinal);
         // sumamos el IVA
         montoTotalFinal += montoTotalFinal * 0.19;
-        System.out.println("Monto total final con IVA: " + montoTotalFinal);
         historial.setMontoTotalFinal(montoTotalFinal);
 
         // devolvemos el monto total final

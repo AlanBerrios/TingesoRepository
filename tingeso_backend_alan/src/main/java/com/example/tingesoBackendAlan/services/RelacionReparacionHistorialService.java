@@ -16,32 +16,25 @@ public class RelacionReparacionHistorialService {
     public List<RelacionReparacionHistorialEntity> getRelacionReparacionHistorial() {
         return relacionReparacionHistorialRepository.findAll();
     }
-
     public RelacionReparacionHistorialEntity getRelacionReparacionHistorialById(Long id) {
         return relacionReparacionHistorialRepository.findById(id).get();
     }
-
     public RelacionReparacionHistorialEntity saveRelacionReparacionHistorial(RelacionReparacionHistorialEntity relacionReparacionHistorial) {
         return relacionReparacionHistorialRepository.save(relacionReparacionHistorial);
     }
-
     public RelacionReparacionHistorialEntity updateRelacionReparacionHistorial(RelacionReparacionHistorialEntity relacionReparacionHistorial) {
         return relacionReparacionHistorialRepository.save(relacionReparacionHistorial);
     }
-
     public Boolean deleteRelacionReparacionHistorial(Long id) {
         relacionReparacionHistorialRepository.deleteById(id);
         return true;
     }
-
     public RelacionReparacionHistorialEntity getRelacionReparacionHistorialByHistorialId(Long idHistorial) {
         return relacionReparacionHistorialRepository.findByIdHistorial(idHistorial);
     }
-
     public RelacionReparacionHistorialEntity getRelacionReparacionHistorialByReparacionId(Long idReparacion) {
         return relacionReparacionHistorialRepository.findByIdReparacion(idReparacion);
     }
-
     public Integer countByHistorialId(Long idHistorial) {
         return relacionReparacionHistorialRepository.countByIdHistorial(idHistorial);
     }

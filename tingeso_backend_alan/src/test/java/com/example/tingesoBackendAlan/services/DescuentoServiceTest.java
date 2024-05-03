@@ -46,7 +46,7 @@ public class DescuentoServiceTest {
     }
 
     @Test
-    public void testDescuentoNumeroDeReparaciones() {
+    public void testDescuentoNumeroDeReparacionesGasolina2() {
 
         AutoEntity auto = new AutoEntity();
         ReparacionEntity reparacion = new ReparacionEntity();
@@ -66,6 +66,632 @@ public class DescuentoServiceTest {
 
         double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
         assertEquals(0.05, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesGasolina3() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Gasolina");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(3);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.10, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesGasolina6() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+        ReparacionEntity reparacion4 = new ReparacionEntity();
+        ReparacionEntity reparacion5 = new ReparacionEntity();
+        ReparacionEntity reparacion6 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Gasolina");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        reparacion4.setPatente("ABC123");
+        reparacion4.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion4);
+
+        reparacion5.setPatente("ABC123");
+        reparacion5.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion5);
+
+        reparacion6.setPatente("ABC123");
+        reparacion6.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion6);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(6);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.15, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesGasolina10() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+        ReparacionEntity reparacion4 = new ReparacionEntity();
+        ReparacionEntity reparacion5 = new ReparacionEntity();
+        ReparacionEntity reparacion6 = new ReparacionEntity();
+        ReparacionEntity reparacion7 = new ReparacionEntity();
+        ReparacionEntity reparacion8 = new ReparacionEntity();
+        ReparacionEntity reparacion9 = new ReparacionEntity();
+        ReparacionEntity reparacion10 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Gasolina");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        reparacion4.setPatente("ABC123");
+        reparacion4.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion4);
+
+        reparacion5.setPatente("ABC123");
+        reparacion5.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion5);
+
+        reparacion6.setPatente("ABC123");
+        reparacion6.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion6);
+
+        reparacion7.setPatente("ABC123");
+        reparacion7.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion7);
+
+        reparacion8.setPatente("ABC123");
+        reparacion8.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion8);
+
+        reparacion9.setPatente("ABC123");
+        reparacion9.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion9);
+
+        reparacion10.setPatente("ABC123");
+        reparacion10.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion10);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(10);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.20, descuento);
+    }
+
+    @Test
+    public void testDescuentoNumeroDeReparacionesDiesel2() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Diesel");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(2);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.07, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesDiesel3() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Diesel");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(3);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.12, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesDiesel6() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+        ReparacionEntity reparacion4 = new ReparacionEntity();
+        ReparacionEntity reparacion5 = new ReparacionEntity();
+        ReparacionEntity reparacion6 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Diesel");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        reparacion4.setPatente("ABC123");
+        reparacion4.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion4);
+
+        reparacion5.setPatente("ABC123");
+        reparacion5.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion5);
+
+        reparacion6.setPatente("ABC123");
+        reparacion6.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion6);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(6);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.17, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesDiesel10() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+        ReparacionEntity reparacion4 = new ReparacionEntity();
+        ReparacionEntity reparacion5 = new ReparacionEntity();
+        ReparacionEntity reparacion6 = new ReparacionEntity();
+        ReparacionEntity reparacion7 = new ReparacionEntity();
+        ReparacionEntity reparacion8 = new ReparacionEntity();
+        ReparacionEntity reparacion9 = new ReparacionEntity();
+        ReparacionEntity reparacion10 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Diesel");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        reparacion4.setPatente("ABC123");
+        reparacion4.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion4);
+
+        reparacion5.setPatente("ABC123");
+        reparacion5.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion5);
+
+        reparacion6.setPatente("ABC123");
+        reparacion6.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion6);
+
+        reparacion7.setPatente("ABC123");
+        reparacion7.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion7);
+
+        reparacion8.setPatente("ABC123");
+        reparacion8.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion8);
+
+        reparacion9.setPatente("ABC123");
+        reparacion9.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion9);
+
+        reparacion10.setPatente("ABC123");
+        reparacion10.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion10);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(10);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.22, descuento);
+    }
+
+    @Test
+    public void testDescuentoNumeroDeReparacionesHibrido2() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Hibrido");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(2);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.10, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesHibrido3() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Hibrido");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(3);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.15, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesHibrido6() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+        ReparacionEntity reparacion4 = new ReparacionEntity();
+        ReparacionEntity reparacion5 = new ReparacionEntity();
+        ReparacionEntity reparacion6 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Hibrido");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        reparacion4.setPatente("ABC123");
+        reparacion4.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion4);
+
+        reparacion5.setPatente("ABC123");
+        reparacion5.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion5);
+
+        reparacion6.setPatente("ABC123");
+        reparacion6.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion6);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(6);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.20, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesHibrido10() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+        ReparacionEntity reparacion4 = new ReparacionEntity();
+        ReparacionEntity reparacion5 = new ReparacionEntity();
+        ReparacionEntity reparacion6 = new ReparacionEntity();
+        ReparacionEntity reparacion7 = new ReparacionEntity();
+        ReparacionEntity reparacion8 = new ReparacionEntity();
+        ReparacionEntity reparacion9 = new ReparacionEntity();
+        ReparacionEntity reparacion10 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Hibrido");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        reparacion4.setPatente("ABC123");
+        reparacion4.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion4);
+
+        reparacion5.setPatente("ABC123");
+        reparacion5.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion5);
+
+        reparacion6.setPatente("ABC123");
+        reparacion6.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion6);
+
+        reparacion7.setPatente("ABC123");
+        reparacion7.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion7);
+
+        reparacion8.setPatente("ABC123");
+        reparacion8.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion8);
+
+        reparacion9.setPatente("ABC123");
+        reparacion9.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion9);
+
+        reparacion10.setPatente("ABC123");
+        reparacion10.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion10);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(10);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.25, descuento);
+    }
+
+    @Test
+    public void testDescuentoNumeroDeReparacionesElectrico2() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Electrico");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(2);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.08, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesElectrico3() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Electrico");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(3);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.13, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesElectrico6() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+        ReparacionEntity reparacion4 = new ReparacionEntity();
+        ReparacionEntity reparacion5 = new ReparacionEntity();
+        ReparacionEntity reparacion6 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Electrico");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        reparacion4.setPatente("ABC123");
+        reparacion4.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion4);
+
+        reparacion5.setPatente("ABC123");
+        reparacion5.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion5);
+
+        reparacion6.setPatente("ABC123");
+        reparacion6.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion6);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(6);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.18, descuento);
+    }
+    @Test
+    public void testDescuentoNumeroDeReparacionesElectrico10() {
+
+        AutoEntity auto = new AutoEntity();
+        ReparacionEntity reparacion = new ReparacionEntity();
+        ReparacionEntity reparacion2 = new ReparacionEntity();
+        ReparacionEntity reparacion3 = new ReparacionEntity();
+        ReparacionEntity reparacion4 = new ReparacionEntity();
+        ReparacionEntity reparacion5 = new ReparacionEntity();
+        ReparacionEntity reparacion6 = new ReparacionEntity();
+        ReparacionEntity reparacion7 = new ReparacionEntity();
+        ReparacionEntity reparacion8 = new ReparacionEntity();
+        ReparacionEntity reparacion9 = new ReparacionEntity();
+        ReparacionEntity reparacion10 = new ReparacionEntity();
+
+        auto.setPatente("ABC123");
+        auto.setTipoMotor("Electrico");
+
+        reparacion.setPatente("ABC123");
+        reparacion.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion);
+
+        reparacion2.setPatente("ABC123");
+        reparacion2.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion2);
+
+        reparacion3.setPatente("ABC123");
+        reparacion3.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion3);
+
+        reparacion4.setPatente("ABC123");
+        reparacion4.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion4);
+
+        reparacion5.setPatente("ABC123");
+        reparacion5.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion5);
+
+        reparacion6.setPatente("ABC123");
+        reparacion6.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion6);
+
+        reparacion7.setPatente("ABC123");
+        reparacion7.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion7);
+
+        reparacion8.setPatente("ABC123");
+        reparacion8.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion8);
+
+        reparacion9.setPatente("ABC123");
+        reparacion9.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion9);
+
+        reparacion10.setPatente("ABC123");
+        reparacion10.setFechaSalida(LocalDate.now().minusMonths(1));
+        reparacionRepository.save(reparacion10);
+
+        // Configura el comportamiento simulado de reparacionRepository
+        when(autoRepository.findByPatente("ABC123")).thenReturn(auto);
+        when(reparacionRepository.countByPatente("ABC123")).thenReturn(10);
+
+        double descuento = descuentosService.calcularDescuentoNumeroDeReparaciones("ABC123");
+        assertEquals(0.23, descuento);
     }
 
     @Test

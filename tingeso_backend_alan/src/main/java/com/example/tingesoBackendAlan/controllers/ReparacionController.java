@@ -1,5 +1,6 @@
 package com.example.tingesoBackendAlan.controllers;
 
+import com.example.tingesoBackendAlan.entities.AutoEntity;
 import com.example.tingesoBackendAlan.entities.ReparacionEntity;
 import com.example.tingesoBackendAlan.services.ReparacionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,26 +51,10 @@ public class ReparacionController {
         return ResponseEntity.ok(reparacionNew);
     }
 
-    @PutMapping("/patente/{patente}")
-    public ResponseEntity<ReparacionEntity> updateReparacion(@PathVariable String patente, @RequestBody ReparacionEntity reparacion) {
-        // Verificar si la reparación existe
-        ReparacionEntity reparacionExistente = reparacionService.getReparacionByPatente(patente);
-        if (reparacionExistente == null) {
-            // La reparación no existe, devolver un error
-            return ResponseEntity.notFound().build();
-        }
-
-        reparacionExistente.setTipoReparacion(reparacion.getTipoReparacion());
-        reparacionExistente.setDescripcion(reparacion.getDescripcion());
-        reparacionExistente.setFechaIngreso(reparacion.getFechaIngreso());
-        reparacionExistente.setHoraIngreso(reparacion.getHoraIngreso());
-        reparacionExistente.setFechaSalida(reparacion.getFechaSalida());
-        reparacionExistente.setHoraSalida(reparacion.getHoraSalida());
-        reparacionExistente.setFechaRetiro(reparacion.getFechaRetiro());
-        reparacionExistente.setHoraRetiro(reparacion.getHoraRetiro());
-
-        ReparacionEntity reparacionActualizada = reparacionService.updateReparacion(reparacionExistente);
-        return ResponseEntity.ok(reparacionActualizada);
+    @PutMapping("/")
+    public ResponseEntity<ReparacionEntity> updateReparacion(@RequestBody ReparacionEntity reparacion){
+        ReparacionEntity reparacionUpdated = reparacionService.updateReparacion(reparacion);
+        return ResponseEntity.ok(reparacionUpdated);
     }
 
     @DeleteMapping("/id/{id}")

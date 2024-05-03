@@ -9,7 +9,10 @@ import CreateHistorial from './components/CreateHistorial';
 import ReparacionList from './components/ReparacionList';
 import HistorialList from './components/HistorialList';
 import FormReparacion from './components/FormReparacion';
-
+import R1 from './components/R1';
+import R2 from './components/R2';
+import R4 from './components/R4';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -17,21 +20,15 @@ function App() {
       <Header/>
 
       <Routes>
+        <Route path="/" element={<Home/>}/>
         <Route path="/auto" element={<AutosList/>}/>
-        {/* <Route path="/auto/:patente" element={<AutoView/>}/> */}
         <Route path="/auto/crear" element={<CreateAuto/>}/>
-
-        
         <Route path="/reparacion" element={<ReparacionList/>}/>
-        {/* <Route path="/reparacion/:id" element={<ReparacionView/>}/> */}
-        
         <Route path="/historial" element={<HistorialList/>}/>
-
         <Route path="/historial/crear" element={<CreateHistorial/>}/> 
-
-        {/*
-        Aqui se vera el historial especificamente, mostrando todos las reparaciones vinculadas al idHistorial
-        <Route path="/historial/:id" element={<HistorialView/>}/>*/}
+        <Route path="/r1" element={<R1/>}/>
+        <Route path="/r2" element={<R2/>}/>
+        <Route path="/r4" element={<R4/>}/>
         
 
       </Routes>

@@ -15,7 +15,6 @@ public class AutoService {
     public ArrayList<AutoEntity> getAutos(){
         return (ArrayList<AutoEntity>) autoRepository.findAll();
     }
-
     public AutoEntity saveAuto(AutoEntity auto){
         return autoRepository.save(auto);
     }
@@ -25,7 +24,6 @@ public class AutoService {
     public AutoEntity updateAuto(AutoEntity auto) {
         return autoRepository.save(auto);
     }
-
     public Boolean deleteAuto(String patente) {
         autoRepository.deleteByPatente(patente);
         return true;

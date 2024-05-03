@@ -1,8 +1,10 @@
 package com.example.tingesoBackendAlan.services;
 
 import com.example.tingesoBackendAlan.entities.AutoEntity;
+import com.example.tingesoBackendAlan.entities.HistorialEntity;
 import com.example.tingesoBackendAlan.entities.ReparacionEntity;
 import com.example.tingesoBackendAlan.repositories.AutoRepository;
+import com.example.tingesoBackendAlan.repositories.HistorialRepository;
 import com.example.tingesoBackendAlan.repositories.ReparacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ public class RecargosService {
     AutoRepository autoRepository;
     @Autowired
     ReparacionRepository reparacionRepository;
+    @Autowired
+    HistorialRepository historialRepository;
 
     public double calcularRecargoPorKilometraje(AutoEntity auto) {
         double recargo = 0;
@@ -110,5 +114,6 @@ public class RecargosService {
 
         return recargo;
     }
+
 
 }
