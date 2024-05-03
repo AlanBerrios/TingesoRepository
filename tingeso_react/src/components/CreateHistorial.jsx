@@ -8,12 +8,44 @@ export default function CreateHistorial() {
   const [numeroReparaciones, setNumeroReparaciones] = useState(1); // Valor inicial del select
   const [reparaciones, setReparaciones] = useState([]);
   const [historialList, setHistorialList] = useState([]);
+  const [nextHistorialId, setNextHistorialId] = useState(null);
+
+  useEffect(() => {
+    fetchHistorial();
+  }, []);
+
+  async function fetchHistorial() {
+    try {
+      const response = await gestionService.getHistoriales();
+      setHistorialList(response.data);
+      const idMax = await getMaxIdHistorial();
+      setNextHistorialId(idMax + 1);
+    } catch (error) {
+      alert("Error al obtener los historiales.");
+    }
+  }
 
   async function handleCrearHistorial(e) {
     e.preventDefault();
     try {
+      // Verificar si el auto existe antes de crear el historial
+      const autoExiste = await verificarAuto(patente);
+      
+      if (!autoExiste) {
+        alert("El auto no existe en el repositorio.");
+        return;
+      }
+
+      // Verificar si hay al menos una reparación asociada a la patente
+      const tieneReparaciones = await verificarReparaciones(patente);
+
+      if (!tieneReparaciones) {
+        alert("No hay reparaciones asociadas a la patente ingresada.");
+        return;
+      }
+
       const historialResponse = await gestionService.crearHistorial({
-        // SETEAR ID HISTORIAL = NEXIDHISTORIAL ACA
+        // SETEAR ID HISTORIAL = NEXIDHISTORIALACA
         patente,
         rut,
         numeroReparaciones: numeroReparaciones // Guardar el número de reparaciones en el historial
@@ -50,24 +82,47 @@ export default function CreateHistorial() {
     setReparaciones([...reparaciones, reparacionData]);
   };
 
-  useEffect(() => {
-    fetchHistorial();
-  }, []);
-
-  async function fetchHistorial() {
+  async function getMaxIdHistorial() {
     try {
       const response = await gestionService.getHistoriales();
-      setHistorialList(response.data);
+      const historiales = response.data;
+      const ids = historiales.map((historial) => historial.idHistorial);
+      const idMax = Math.max(...ids);
+      return idMax;
     } catch (error) {
-      alert("Error al obtener los historiales.");
+      console.log(error);
+      return -1;
     }
   }
 
-  const nextHistorialId = historialList.length + 1;
+  async function verificarAuto(patente) {
+    console.log("Verificando auto con patente:", patente);
+    try {
+      const response = await gestionService.getAuto(patente);
+      console.log("Auto encontrado:", response.data);
+      // Verifica si la respuesta es exitosa y si existe un auto con la patente
+      return response.status === 200;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  async function verificarReparaciones(patente) {
+    try {
+      console.log("Verificando reparaciones asociadas a la patente:", patente);
+      const response = await gestionService.getReparacionByPatente(patente);
+      console.log("Reparaciones encontradas:", response.data);
+      return response.status === 200;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 
   return (
     <div className="container">
-      <h1 className="mb-4">Crear Historial de reparaciones. ID: {nextHistorialId} </h1>
+      <h1 className="mb-4">Crear Historial de reparaciones. ID: {nextHistorialId !== null ? nextHistorialId : 'Cargando...'} </h1>
       <form className="border row g-3 px-4">
         <div className="col-12">
           <label htmlFor="patente" className="form-label">
@@ -127,7 +182,7 @@ export default function CreateHistorial() {
             className="btn btn-primary"
             onClick={handleCrearHistorial}
           >
-            Guardar Historial ID: {nextHistorialId}
+            Guardar Historial ID: {nextHistorialId !== null ? nextHistorialId : 'Cargando...'}
           </button>
         </div>
       </form>

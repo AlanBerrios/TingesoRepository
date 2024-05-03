@@ -28,7 +28,7 @@ function getAutos() {
 }
 
 function getAuto(patente) {
-    return axios.get(`${AUTO_API_URL}/${patente}`)
+    return axios.get(`${AUTO_API_URL}${patente}`)
 }
 
 function crearReparacion(reparacion) {
@@ -41,6 +41,10 @@ function getReparaciones() {
 
 function getReparacion(idReparacion) {
     return axios.get(`${REPARACIONES_API_URL}/${idReparacion}`)
+}
+
+function getReparacionByPatente(patente) {
+    return axios.get(`${REPARACIONES_API_URL}patente/${patente}`)
 }
 
 function crearBono(bono) {
@@ -84,6 +88,6 @@ function getRelacionesReparacionHistorial(idRelacionReparacionHistorial) {
 
 
 export default {crearCliente, getCliente, getClientes, crearAuto, getAuto, getAutos, crearReparacion, getReparacion, 
-    getReparaciones, crearBono, getBono, getBonos, crearHistorial, getHistorial, getHistoriales, crearRelacionReparacionHistorial, getRelacionesReparacionHistorial, getRelacionReparacionHistorial
+    getReparaciones, getReparacionByPatente, crearBono, getBono, getBonos, crearHistorial, getHistorial, getHistoriales, crearRelacionReparacionHistorial, getRelacionesReparacionHistorial, getRelacionReparacionHistorial
 }
 

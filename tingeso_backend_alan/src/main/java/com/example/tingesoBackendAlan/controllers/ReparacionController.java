@@ -26,7 +26,7 @@ public class ReparacionController {
         return ResponseEntity.ok(reparaciones);
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ReparacionEntity> getReparacionById(@PathVariable Long id) {
         ReparacionEntity reparacion = reparacionService.getReparacionById(id);
         return ResponseEntity.ok(reparacion);

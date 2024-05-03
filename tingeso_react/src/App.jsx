@@ -22,7 +22,7 @@ function App() {
         <Route path="/auto/crear" element={<CreateAuto/>}/>
 
         
-        <Route path="/reparacion" element={<ReparacionList/>}/>**
+        <Route path="/reparacion" element={<ReparacionList/>}/>
         {/* <Route path="/reparacion/:id" element={<ReparacionView/>}/> */}
         
         <Route path="/historial" element={<HistorialList/>}/>
