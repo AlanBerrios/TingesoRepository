@@ -10,7 +10,7 @@ services:
     volumes:
       - ./backend.conf:/etc/nginx/nginx.conf
     networks:
-      - tingeso-alan-backend-network
+      - tingeso_backend_alan-network
     depends_on:
       - spring1
       - spring2
@@ -36,16 +36,16 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
-      - tingeso-alan-mysql-volume:/var/lib/mysqlql/data
+      - tingeso-alan-mysql-volume:/var/lib/mysql/data
     networks:
-      - tingeso-alan-backend-network
+      - tingeso_backend_alan-network
     environment:      
-      mysql_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: mysql
     ports:
-      - 5435:3306      
+      - 5435:3306
   spring1:
-    container_name: tingeso-alan-backend-container-1
-    image: alanberrios/tingeso-alan-backend
+    container_name: tingeso_backend_alan-container-1
+    image: alanberrios/tingeso_backend_alan
     ports:
       - 8091:8090
     environment:
@@ -54,15 +54,15 @@ services:
       DB_USERNAME: mysql
       DB_PASSWORD: 1234
     networks:
-      - tingeso-alan-backend-network
+      - tingeso_backend_alan-network
     deploy:
       restart_policy:
         condition: on-failure
     depends_on:
       - mysql
   spring2:
-    container_name: tingeso-alan-backend-container-2
-    image: alanberrios/tingeso-alan-backend
+    container_name: tingeso_backend_alan-container-2
+    image: alanberrios/tingeso_backend_alan
     ports:
       - 8092:8090
     environment:
@@ -71,15 +71,15 @@ services:
       DB_USERNAME: mysql
       DB_PASSWORD: mysql
     networks:
-      - tingeso-alan-backend-network
+      - tingeso_backend_alan-network
     deploy:
       restart_policy:
         condition: on-failure
     depends_on:
       - mysql
   spring3:
-    container_name: tingeso-alan-backend-container-3
-    image: alanberrios/tingeso-alan-backend
+    container_name: tingeso_backend_alan-container-3
+    image: alanberrios/tingeso_backend_alan
     ports:
       - 8093:8090
     environment:
@@ -88,7 +88,7 @@ services:
       DB_USERNAME: mysql
       DB_PASSWORD: mysql
     networks:
-      - tingeso-alan-backend-network
+      - tingeso_backend_alan-network
     deploy:
       restart_policy:
         condition: on-failure
@@ -126,4 +126,4 @@ volumes:
   tingeso-alan-mysql-volume:
 networks:
   tingeso-alan-frontend-network:
-  tingeso-alan-backend-network:
+  tingeso_backend_alan-network:
